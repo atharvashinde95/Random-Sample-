@@ -1,15 +1,19 @@
+# ── LangChain 1.x ecosystem ─────────────────────────────────
+# langchain 1.x ships create_agent (replaces the deprecated
+# langgraph.prebuilt.create_react_agent from 0.x)
 langchain==1.0.0
 langchain-openai==1.0.0
+ 
+# langgraph is still needed for MemorySaver (short-term memory)
+# and the underlying graph runtime used by create_agent
 langgraph==1.0.0
-
+ 
 # ── OpenAI HTTP client ───────────────────────────────────────
-# Used internally by langchain-openai to call the Capgemini
-# OpenAI-compatible endpoint. Must stay in 1.x — the 2.x SDK
-# has breaking changes in the response object structure.
+# Must stay in 1.x — 2.x has breaking changes in the response object
 openai>=1.58.0,<2.0.0
-
-# ── Streamlit UI ─────────────────────────────────────────────
+ 
+# ── UI ───────────────────────────────────────────────────────
 streamlit>=1.40.0,<2.0.0
-
+ 
 # ── Utilities ────────────────────────────────────────────────
 python-dotenv>=1.0.0,<2.0.0
