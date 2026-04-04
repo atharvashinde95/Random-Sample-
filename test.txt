@@ -1,38 +1,15 @@
-from langchain.messages import ToolMessage
+langchain==1.0.0
+langchain-openai==1.0.0
+langgraph==1.0.0
 
-# READ state
-@tool
-def get_last_user_message(runtime: ToolRuntime) -> str:
-    """Get the most recent message from the user."""
-    messages = runtime.state["messages"]
-    for message in reversed(messages):
-        if isinstance(message, HumanMessage):
-            return message.content
-    return "No user messages found"
+# ── OpenAI HTTP client ───────────────────────────────────────
+# Used internally by langchain-openai to call the Capgemini
+# OpenAI-compatible endpoint. Must stay in 1.x — the 2.x SDK
+# has breaking changes in the response object structure.
+openai>=1.58.0,<2.0.0
 
+# ── Streamlit UI ─────────────────────────────────────────────
+streamlit>=1.40.0,<2.0.0
 
-@tool
-def get_user_preference(pref_name: str, runtime: ToolRuntime) -> str:
-    """Get a user preference value by name."""
-    preferences = runtime.state.get("user_preferences", {})
-    return preferences.get(pref_name, "Not set")
-
-
-# UPDATE state (FIXED)
-@tool
-def set_user_name(new_name: str, runtime: ToolRuntime) -> Command:
-    """Set the user's name in the conversation state."""
-
-    print(f"   ✏️ Updating state: user_name = '{new_name}'")
-
-    return Command(
-        update={
-            "user_name": new_name,
-            "messages": [
-                ToolMessage(
-                    content=f"User name set to {new_name}",
-                    tool_call_id=runtime.tool_call_id
-                )
-            ]
-        }
-    )
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv>=1.0.0,<2.0.0
