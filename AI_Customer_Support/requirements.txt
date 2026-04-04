@@ -1,0 +1,26 @@
+# ============================================================
+# Pinned to the LangChain 1.x ecosystem
+# Install:  pip install -r requirements.txt
+# ============================================================
+
+# ── Core LangChain packages ──────────────────────────────────
+# langchain 1.0.0 released Oct 17 2025
+# Pin the main package exactly as requested; allow patch updates
+# in langchain-core and langchain-openai so security fixes apply
+langchain==1.0.0
+langchain-core>=1.0.0,<2.0.0       # abstractions layer (AIMessage, @tool, etc.)
+langchain-openai>=1.0.0,<2.0.0     # ChatOpenAI with base_url for Capgemini endpoint
+
+# ── LangGraph ────────────────────────────────────────────────
+# create_react_agent, MemorySaver, ToolNode all live here
+# langgraph 1.0.0 shipped alongside langchain 1.0.0 (Oct 2025)
+langgraph>=1.0.0,<2.0.0
+
+# ── OpenAI SDK (underlying HTTP client used by langchain-openai) ─
+openai>=1.58.0,<2.0.0
+
+# ── Streamlit UI ─────────────────────────────────────────────
+streamlit>=1.40.0,<2.0.0
+
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv>=1.0.0,<2.0.0        # reads .env file
