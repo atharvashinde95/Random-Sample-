@@ -1,19 +1,131 @@
-# ── LangChain 1.x ecosystem ─────────────────────────────────
-# langchain 1.x ships create_agent (replaces the deprecated
-# langgraph.prebuilt.create_react_agent from 0.x)
-langchain==1.0.0
-langchain-openai==1.0.0
- 
-# langgraph is still needed for MemorySaver (short-term memory)
-# and the underlying graph runtime used by create_agent
-langgraph==1.0.0
- 
-# ── OpenAI HTTP client ───────────────────────────────────────
-# Must stay in 1.x — 2.x has breaking changes in the response object
-openai>=1.58.0,<2.0.0
- 
-# ── UI ───────────────────────────────────────────────────────
-streamlit>=1.40.0,<2.0.0
- 
-# ── Utilities ────────────────────────────────────────────────
-python-dotenv>=1.0.0,<2.0.0
+"""
+Agent — the brain of the helpdesk assistant.
+
+Uses langgraph.prebuilt.create_react_agent (correct API for LangGraph 0.2+/1.x).
+Short-term memory via MemorySaver (per thread_id).
+Long-term memory via memory_store (preferences_store.json).
+"""
+
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import AIMessage, ToolMessage, SystemMessage
+from langgraph.prebuilt import create_react_agent       # ✅ correct import
+from langgraph.checkpoint.memory import MemorySaver
+
+from tools import ALL_TOOLS
+import memory_store
+from mock_data import EMPLOYEES
+
+load_dotenv()
+
+
+# ── LLM setup ────────────────────────────────────────────────────────────────
+
+def _build_llm() -> ChatOpenAI:
+    return ChatOpenAI(
+        base_url=os.getenv(
+            "OPENAI_BASE_URL",
+            "https://openai.generative.engine.capgemini.com/v1"
+        ),
+        api_key=os.getenv("GENERATIVE_ENGINE_API_KEY", "YOUR_API_KEY_HERE"),
+        model=os.getenv("MODEL_NAME", "openai.gpt-4o"),
+        temperature=0.3,
+        max_tokens=1024,
+    )
+
+
+# ── System prompt ─────────────────────────────────────────────────────────────
+
+def _build_system_prompt(employee_id: str) -> str:
+    emp   = EMPLOYEES.get(employee_id, {})
+    prefs = memory_store.get_all_preferences(employee_id)
+
+    lang  = prefs.get("preferred_language", "English")
+    style = prefs.get("response_style", "detailed")
+
+    pref_lines = (
+        "\n".join(f"    {k}: {v}" for k, v in prefs.items())
+        if prefs else "    (none saved yet)"
+    )
+
+    return f"""You are a helpful Employee Helpdesk AI Assistant.
+
+=== SESSION CONTEXT (injected by the app — never shown to user) ===
+  Employee ID  : {employee_id}
+  Name         : {emp.get('name', 'Unknown')}
+  Department   : {emp.get('department', 'Unknown')}
+  Location     : {emp.get('location', 'Unknown')}
+=== LONG-TERM PREFERENCES (loaded from store) ===
+{pref_lines}
+===================================================================
+
+INSTRUCTIONS:
+1. Always pass employee_id="{employee_id}" to any tool that requires it.
+   The user should never need to say their own ID.
+2. Respond in {lang}. Keep responses {style}.
+3. NEVER guess leave balances, ticket details, or account data — always call the right tool.
+4. When a user says "remember X" or "set my preference to Y", call set_user_preference immediately.
+5. Be concise, warm, and professional.
+6. If you just updated a preference, confirm that it will be remembered in future sessions too.
+"""
+
+
+# ── Agent factory ─────────────────────────────────────────────────────────────
+
+def create_agent(employee_id: str):           # ✅ clean name, no alias collision
+    """
+    Build a LangGraph ReAct agent for a given employee.
+    - Short-term memory: MemorySaver (per thread_id, in-session only)
+    - Long-term memory:  system prompt baked with saved preferences
+    """
+    llm    = _build_llm()
+    memory = MemorySaver()
+    prompt = _build_system_prompt(employee_id)
+
+    # create_react_agent accepts `state_modifier` for the system prompt
+    # (a plain string is automatically wrapped as a SystemMessage)
+    agent = create_react_agent(
+        model=llm,
+        tools=ALL_TOOLS,
+        state_modifier=prompt,   # ✅ correct parameter name
+        checkpointer=memory,
+    )
+    return agent
+
+
+# ── Run helper ────────────────────────────────────────────────────────────────
+
+def run_agent(agent, user_message: str, thread_id: str) -> list:
+    config = {"configurable": {"thread_id": thread_id}}
+    result = agent.invoke(
+        {"messages": [{"role": "user", "content": user_message}]},
+        config=config,
+    )
+    return result["messages"]
+
+
+def parse_run_result(messages: list) -> dict:
+    tool_calls   = []
+    tool_results = []
+    final_text   = ""
+
+    for msg in messages:
+        if isinstance(msg, AIMessage):
+            if msg.tool_calls:
+                for tc in msg.tool_calls:
+                    tool_calls.append({"name": tc["name"], "args": tc["args"]})
+            if msg.content and not msg.tool_calls:
+                final_text = msg.content
+
+        elif isinstance(msg, ToolMessage):
+            tool_results.append({
+                "tool":    msg.name,
+                "content": str(msg.content),
+            })
+
+    return {
+        "tool_calls":   tool_calls,
+        "tool_results": tool_results,
+        "response":     final_text,
+    }
