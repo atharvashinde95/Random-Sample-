@@ -1,20 +1,38 @@
-# ── LangChain 1.x ───────────────────────────────────────────
-# langchain 1.x ships create_agent in langchain.agents
-# (the replacement for langgraph.prebuilt.create_react_agent)
+# ============================================================
+#  Employee Helpdesk AI — requirements
+#
+#  IMPORTANT: langchain==1.0.0 does NOT exist on PyPI.
+#  The 1.x line starts at 1.0.3 (released Oct 2025).
+#
+#  Run this FIRST before streamlit run app.py:
+#
+#  Windows (fresh venv):
+#    deactivate
+#    rmdir /s /q .venv
+#    python -m venv .venv
+#    .venv\Scripts\activate
+#    pip install -r requirements.txt
+#
+#  Mac/Linux (fresh venv):
+#    deactivate && rm -rf .venv
+#    python -m venv .venv && source .venv/bin/activate
+#    pip install -r requirements.txt
+#
+#  Then run:
+#    streamlit run app.py
+# ============================================================
+
+# ── LangChain ecosystem ──────────────────────────────────────
 langchain>=1.0.3
- 
-# langchain-openai 1.x is compatible with langchain 1.x
 langchain-openai>=1.0.3
- 
-# langgraph is still needed for MemorySaver (short-term memory)
-# and the graph runtime that create_agent runs on top of
+langchain-core>=1.0.0
 langgraph>=1.0.0
- 
+
 # ── OpenAI HTTP client ───────────────────────────────────────
 openai>=1.58.0,<2.0.0
- 
+
 # ── UI ───────────────────────────────────────────────────────
 streamlit>=1.40.0,<2.0.0
- 
+
 # ── Utilities ────────────────────────────────────────────────
 python-dotenv>=1.0.0,<2.0.0
