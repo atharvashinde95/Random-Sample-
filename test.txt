@@ -1,16 +1,23 @@
 """
 Agent — the brain of the helpdesk assistant.
 
-Uses langgraph.prebuilt.create_react_agent (correct API for LangGraph 0.2+/1.x).
-Short-term memory via MemorySaver (per thread_id).
-Long-term memory via memory_store (preferences_store.json).
+Uses the REAL LangChain 1.x API:
+  from langchain.agents import create_agent   ← correct for langchain>=1.0.3
+
+Key differences from 0.x:
+  - create_agent() is the new standard, replacing langgraph.prebuilt.create_react_agent
+  - system_prompt= accepts a plain string
+  - checkpointer= still works the same way (LangGraph MemorySaver under the hood)
+
+NOTE: langchain==1.0.0 does NOT exist on PyPI. The 1.x line starts at 1.0.3.
+      Use the requirements.txt provided alongside this file.
 """
 
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import AIMessage, ToolMessage, SystemMessage
-from langgraph.prebuilt import create_react_agent       # ✅ correct import
+from langchain_core.messages import AIMessage, ToolMessage
+from langchain.agents import create_agent as _lc_create_agent   # real 1.x API
 from langgraph.checkpoint.memory import MemorySaver
 
 from tools import ALL_TOOLS
@@ -73,22 +80,20 @@ INSTRUCTIONS:
 
 # ── Agent factory ─────────────────────────────────────────────────────────────
 
-def create_agent(employee_id: str):           # ✅ clean name, no alias collision
+def create_agent(employee_id: str):
     """
-    Build a LangGraph ReAct agent for a given employee.
-    - Short-term memory: MemorySaver (per thread_id, in-session only)
-    - Long-term memory:  system prompt baked with saved preferences
+    Build a LangChain 1.x agent for a given employee.
+    - _lc_create_agent is langchain.agents.create_agent (the 1.x standard API)
+    - checkpointer gives short-term memory scoped to each thread_id
+    - system_prompt is personalised with employee context + saved preferences
     """
     llm    = _build_llm()
     memory = MemorySaver()
-    prompt = _build_system_prompt(employee_id)
 
-    # create_react_agent accepts `state_modifier` for the system prompt
-    # (a plain string is automatically wrapped as a SystemMessage)
-    agent = create_react_agent(
+    agent = _lc_create_agent(
         model=llm,
         tools=ALL_TOOLS,
-        state_modifier=prompt,   # ✅ correct parameter name
+        system_prompt=_build_system_prompt(employee_id),
         checkpointer=memory,
     )
     return agent
