@@ -1,3 +1,20 @@
-langchain>=0.3.0,<0.4.0
-langchain-openai>=0.2.0,<0.3.0
-langgraph>=0.2.0,<0.3.0
+# ── LangChain 1.x ───────────────────────────────────────────
+# langchain 1.x ships create_agent in langchain.agents
+# (the replacement for langgraph.prebuilt.create_react_agent)
+langchain>=1.0.3
+ 
+# langchain-openai 1.x is compatible with langchain 1.x
+langchain-openai>=1.0.3
+ 
+# langgraph is still needed for MemorySaver (short-term memory)
+# and the graph runtime that create_agent runs on top of
+langgraph>=1.0.0
+ 
+# ── OpenAI HTTP client ───────────────────────────────────────
+openai>=1.58.0,<2.0.0
+ 
+# ── UI ───────────────────────────────────────────────────────
+streamlit>=1.40.0,<2.0.0
+ 
+# ── Utilities ────────────────────────────────────────────────
+python-dotenv>=1.0.0,<2.0.0
