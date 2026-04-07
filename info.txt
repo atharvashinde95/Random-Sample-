@@ -1,0 +1,56 @@
+draw a mermaid diagram for this
+flowchart TD
+  %% Entry
+  U[User Input] --> R[Router: Intent Classification]
+  R -->|GREETING| Guide[Guide Agent]
+  R -->|TRANSCRIPT_UPLOAD| Ingest[Ingestion & Analysis Agent]
+  R -->|QUESTION + transcript_data EXISTS| QA[Contextual QA Agent]
+  R -->|QUESTION + transcript_data MISSING| Guide
+  R -->|IRRELEVANT| Guard[Guardrail Agent]
+  %% Ingestion Agent (MAP/REDUCE)
+  subgraph INGESTION ["Ingestion & Analysis Agent"]
+    direction TB
+    S1[store_transcript] --> Split[Split transcript into chunks]
+    Split --> MapLoop[For each chunk: summarize_chunk (MAP)]
+    MapLoop --> Reduce[combine_summaries (REDUCE)]
+    Reduce --> UpdateState1[Update Global State]
+    UpdateState1 --> Confirm[Response: Exec Summary + Highlights]
+  end
+  Ingest --> S1
+  %% QA Agent (RAG + REACT)
+  subgraph QAAGENT ["Contextual QA Agent"]
+    direction TB
+    Search[search_transcript (RAG)] --> UseSummary[Use analysis_summary for reasoning]
+    UseSummary --> Answer[Response: Grounded Answer]
+  end
+  QA --> Search
+  %% Guide & Guardrail
+  Guide --> GuideResp[Response: "Please upload or paste a meeting transcript first."]
+  Guard --> GuardResp[Response: Reject + Redirect to supported actions]
+  %% Global State & Persistence
+  subgraph STATE ["Global State (MemorySaver)"]
+    direction TB
+    GS[transcript_data; transcript_chunks; chunk_summaries; analysis_summary; message_history; last_user_intent]
+  end
+  %% State flows
+  UpdateState1 --> GS
+  Confirm --> GS
+  Answer --> GS
+  GuideResp --> GS
+  GuardResp --> GS
+  %% Tools summary (side)
+  subgraph TOOLS ["Available Tools"]
+    direction TB
+    T1[store_transcript]
+    T2[summarize_chunk]
+    T3[combine_summaries]
+    T4[search_transcript]
+    T5[get_action_items]
+    T6[summarize_conversation]
+  end
+  S1 --- T1
+  MapLoop --- T2
+  Reduce --- T3
+  Search --- T4
+  Answer --- T5
+  GuideResp --- T6
