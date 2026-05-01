@@ -1,0 +1,16 @@
+job_id,order_id,product_id,product_name,demand_units,current_inventory_units,production_qty,earliest_start_day,due_day,processing_time_min_per_unit,batch_size_units,holding_cost_per_unit_per_day
+J001,O1001,P001,Bread Loaf,500,120,380,1,2,0.8,100,0.25
+J002,O1002,P002,Croissant,300,40,260,1,2,1.2,80,0.35
+J003,O1003,P003,Chocolate Cake,120,10,110,1,3,2.5,40,0.8
+J004,O1004,P004,Cookies,450,150,300,1,4,0.6,150,0.15
+J005,O1005,P005,Fruit Cake,100,20,80,2,4,2.2,40,0.7
+J006,O1006,P006,Muffins,350,70,280,1,3,0.7,100,0.2
+J007,O1007,P007,Garlic Bread,250,30,220,2,5,0.75,100,0.2
+J008,O1008,P008,Brownie,200,50,150,1,3,1.4,50,0.4
+J009,O1009,P009,Pizza Base,600,200,400,1,2,0.5,200,0.12
+J010,O1010,P010,Cream Roll,180,30,150,2,4,1,60,0.3
+J011,O1011,P011,Burger Bun,700,250,450,1,5,0.45,150,0.1
+J012,O1012,P012,Cheese Cake,90,15,75,2,5,2.8,30,0.9
+J013,O1013,P013,Tea Cake,160,40,120,1,4,1.3,40,0.45
+J014,O1014,P014,Breadsticks,320,80,240,2,5,0.65,120,0.15
+J015,O1015,P015,Danish Pastry,140,20,120,1,3,1.6,40,0.5
