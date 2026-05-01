@@ -1,0 +1,12 @@
+5-line message to manager
+I have created a terminal-based LLM + OR-Tools CP-SAT Production Scheduling MVP.
+The system takes a production scheduling question in plain English and extracts objective, machines, time, constraints, and variables using an LLM.
+It validates the CSV dataset using demand, inventory, production quantity, due dates, and processing time.
+OR-Tools CP-SAT then generates the optimized schedule mathematically; the LLM does not create the schedule.
+The final output includes a schedule table, solver summary, late-job report, and validated business explanation.
+5-line implementation plan
+User enters a production scheduling prompt, and the LLM converts it into structured JSON.
+Python applies MVP normalization and asks the user to confirm or correct the extracted plan.
+The CSV dataset is loaded, columns are mapped, and demand/inventory/time validation is performed.
+CP-SAT builds variables, constraints, and the makespan objective, then solves the schedule.
+The result parser creates the final schedule, prepares explanation facts, and the LLM explains only verified solver output.
