@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="G7bHhsXiHpatim91Q7o2" name="Page-1">
+    <mxGraphModel dx="1863" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1a1a1a;" value="Agentic Scheduling" vertex="1">
+          <mxGeometry height="40" width="769" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a12" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#999999;strokeWidth=1.5;" target="s2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="584.5" y="80" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="s2n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;fontSize=13;fontStyle=1;" value="1" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="s2t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Data Connection&amp;nbsp;" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="s2d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Upload CSV/Excel files, validate data, flag issues, preview before saving. Build stub connectors for ERP and factory systems." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="a23" edge="1" parent="1" source="s2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="s3n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;fontSize=13;fontStyle=1;" value="2" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="s3t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Rules Engine" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="s3d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Users type rules in plain English. AI decides if each is a hard constraint or soft preference, shows reasoning. User confirms before saving." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="204" as="geometry" />
+        </mxCell>
+        <mxCell id="a34" edge="1" parent="1" source="s3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="s4n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e51400;strokeColor=#B20000;fontSize=13;fontStyle=1;fontColor=#ffffff;" value="3" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="s4t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Scheduling Solver" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="s4d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Integrate CP-SAT solver. It takes all jobs, machines, rules and priorities and produces 3 schedule variants-cost, deadline, and speed focused." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="a45" edge="1" parent="1" source="s4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="s5n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;fontSize=13;fontStyle=1;" value="4" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="408" as="geometry" />
+        </mxCell>
+        <mxCell id="s5t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="AI Agents" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="s5d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="rule classifier, plan explainer, real-time re-optimiser, data analyser, what-if sandbox agent, and sidebar chat agent." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="a56" edge="1" parent="1" source="s5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="486" as="geometry" />
+        </mxCell>
+        <mxCell id="s6n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;fontSize=13;fontStyle=1;" value="5" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="502" as="geometry" />
+        </mxCell>
+        <mxCell id="s6t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Main Dashboard Screens" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="486" as="geometry" />
+        </mxCell>
+        <mxCell id="s6d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Build the Data tab, KPI priority tab, and Rules tab. Users can upload data, set priority sliders, add rules and see AI classify them live." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="486" as="geometry" />
+        </mxCell>
+        <mxCell id="a67" edge="1" parent="1" source="s6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="s7n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fa6800;strokeColor=#C73500;fontColor=#000000;fontSize=13;fontStyle=1;" value="6" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="596" as="geometry" />
+        </mxCell>
+        <mxCell id="s7t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Schedule View &amp;amp; What-If Sandbox" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="s7d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Interactive Gantt chart, click any job bar for AI explanation, switch between 3 variants. What-If sandbox lets users test changes without affecting the live plan." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="a78" edge="1" parent="1" source="s7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#999999;strokeWidth=1.5;" target="s8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="64" width="1049" x="60" y="674" as="geometry" />
+        </mxCell>
+        <mxCell id="s8n" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d80073;strokeColor=#A50040;fontSize=13;fontStyle=1;fontColor=#ffffff;" value="7" vertex="1">
+          <mxGeometry height="32" width="32" x="80" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="s8t" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontStyle=1;fontColor=#1a1a1a;" value="Sidebar &amp;amp; Chat" vertex="1">
+          <mxGeometry height="64" width="220" x="126" y="674" as="geometry" />
+        </mxCell>
+        <mxCell id="s8d" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#444444;" value="Context-aware chat that knows which tab is open. Responses stream in real time. Quick-action chips for common questions." vertex="1">
+          <mxGeometry height="64" width="420" x="350" y="674" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
