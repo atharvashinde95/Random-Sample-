@@ -1,0 +1,71 @@
+
+<div id="erd"></div>
+
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#1a2540' : '#E6F1FB',
+    primaryTextColor: dark ? '#B5D4F4' : '#0C447C',
+    primaryBorderColor: dark ? '#378ADD' : '#185FA5',
+    edgeLabelBackground: dark ? '#111' : '#fff',
+  },
+});
+
+const diagram = `
+flowchart TD
+    START([__START__]):::gray
+
+    Z1["Zone 1\\nData Ingestion"]:::blue
+    HM1{{"⏸ Confirm\\nfield mapping"}}:::human
+
+    Z2["Zone 2\\nRules & Constraints"]:::purple
+    HM2{{"⏸ Resolve\\nconflict"}}:::human
+    STORE[(Constraint Registry)]:::store
+
+    Z3["Zone 3\\nSolver Core"]:::green
+
+    Z4["Zone 4\\nHuman Validation\\n& What-If"]:::amber
+    HM3{{"⏸ Approve\\nor override"}}:::human
+
+    Z5["Zone 5\\nLive Disruption"]:::coral
+
+    END([__END__]):::gray
+
+    START --> Z1
+    Z1 --> HM1
+    HM1 -->|confirmed| Z2
+    Z2 -->|no conflict| STORE
+    Z2 -->|conflict| HM2
+    HM2 -->|resolved| STORE
+    STORE --> Z3
+    Z3 -->|not optimal| STORE
+    Z3 -->|optimal| Z4
+    Z4 --> HM3
+    HM3 -->|approved| END
+    HM3 -->|override| STORE
+    Z5 -->|disruption| Z3
+
+    classDef blue   fill:#E6F1FB,stroke:#185FA5,color:#0C447C,stroke-width:1.5px
+    classDef purple fill:#EEEDFE,stroke:#534AB7,color:#3C3489,stroke-width:1.5px
+    classDef green  fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1.5px
+    classDef amber  fill:#FAEEDA,stroke:#854F0B,color:#633806,stroke-width:1.5px
+    classDef coral  fill:#FAECE7,stroke:#993C1D,color:#712B13,stroke-width:1.5px
+    classDef human  fill:#FFF9E6,stroke:#BA7517,color:#412402,stroke-width:1.5px,font-style:italic
+    classDef store  fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A,stroke-width:1.5px
+    classDef gray   fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A,stroke-width:1.5px
+`;
+
+const { svg } = await mermaid.render('zone-svg', diagram);
+document.getElementById('erd').innerHTML = svg;
+</script>

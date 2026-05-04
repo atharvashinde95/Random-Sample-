@@ -1,0 +1,121 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+#erd{width:100%;}
+</style>
+
+<div id="erd"></div>
+
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+    primaryColor: dark ? '#1a2540' : '#E6F1FB',
+    primaryTextColor: dark ? '#B5D4F4' : '#0C447C',
+    primaryBorderColor: dark ? '#378ADD' : '#185FA5',
+    secondaryColor: dark ? '#1e1a35' : '#EEEDFE',
+    secondaryTextColor: dark ? '#CECBF6' : '#3C3489',
+    secondaryBorderColor: dark ? '#7F77DD' : '#534AB7',
+    tertiaryColor: dark ? '#0e2018' : '#E1F5EE',
+    tertiaryTextColor: dark ? '#9FE1CB' : '#085041',
+    tertiaryBorderColor: dark ? '#1D9E75' : '#0F6E56',
+    noteBkgColor: dark ? '#2a2010' : '#FAEEDA',
+    noteTextColor: dark ? '#FAC775' : '#633806',
+    edgeLabelBackground: dark ? '#0d1117' : '#ffffff',
+    clusterBkg: dark ? '#0d1117' : '#f8f8f6',
+    clusterBorder: dark ? '#2a2a28' : '#d3d1c7',
+  },
+});
+
+const diagram = `
+flowchart TD
+    START([__START__]):::gray
+    END([__END__]):::gray
+
+    subgraph ZONE1["Zone 1 · Data ingestion"]
+        A1[DataIngestionAgent]:::blue
+        A2[SchemaUnderstanderAgent]:::blue
+        HM1{{"⏸ Human confirms\\nfield mapping"}}:::human
+    end
+
+    subgraph ZONE2["Zone 2 · Rules & constraints"]
+        B1[RuleInterpreterAgent]:::purple
+        B2[ConstraintClassifierAgent]:::purple
+        B3[RuleValidatorAgent]:::purple
+        HM2{{"⏸ Conflict found?\\nHuman picks option"}}:::human
+        REGISTRY[(Constraint Registry\\nMongoDB + Redis)]:::store
+    end
+
+    subgraph ZONE3["Zone 3 · Solver core"]
+        C1[SolverSelectorAgent]:::green
+        C2[SolverOrchestratorAgent]:::green
+        C3[CP-SAT / OR-Tools]:::greencore
+        C4[PlanExplainerAgent]:::green
+        C5[KPIEvaluatorAgent]:::green
+    end
+
+    subgraph ZONE4["Zone 4 · Human validation & What-If"]
+        D1[WhatIfSandboxAgent]:::amber
+        D2[ScenarioComparatorAgent]:::amber
+        D3[AutoRankerAgent]:::amber
+        HM3{{"⏸ Human validates\\nor overrides"}}:::human
+        D4[FeedbackAgent]:::amber
+    end
+
+    subgraph ZONE5["Zone 5 · Live disruption handling"]
+        E1[DisruptionDetectorAgent]:::coral
+        E2[ReOptimizerAgent]:::coral
+        E3[Delta Plan output]:::coral
+    end
+
+    START --> A1
+    A1 --> A2
+    A2 --> HM1
+    HM1 -->|confirmed| B1
+    B1 --> B2
+    B2 --> B3
+    B3 -->|no conflict| REGISTRY
+    B3 -->|conflict detected| HM2
+    HM2 -->|resolved| REGISTRY
+    REGISTRY --> C1
+    C1 --> C2
+    C2 --> C3
+    C3 --> C4
+    C4 --> C5
+    C5 -->|not optimal – relax rules| B3
+    C5 -->|optimal| D1
+    D1 --> D2
+    D2 --> D3
+    D3 --> HM3
+    HM3 -->|approved| END
+    HM3 -->|override| D4
+    D4 -->|re-trigger solve| REGISTRY
+    E1 -->|live signal| E2
+    E2 --> C5
+    E2 --> E3
+    E3 --> HM3
+
+    classDef blue fill:#E6F1FB,stroke:#185FA5,color:#0C447C,stroke-width:1px
+    classDef purple fill:#EEEDFE,stroke:#534AB7,color:#3C3489,stroke-width:1px
+    classDef green fill:#E1F5EE,stroke:#0F6E56,color:#085041,stroke-width:1px
+    classDef greencore fill:#9FE1CB,stroke:#0F6E56,color:#04342C,stroke-width:2px,font-weight:600
+    classDef amber fill:#FAEEDA,stroke:#854F0B,color:#633806,stroke-width:1px
+    classDef coral fill:#FAECE7,stroke:#993C1D,color:#712B13,stroke-width:1px
+    classDef human fill:#FFF9E6,stroke:#BA7517,color:#412402,stroke-width:1.5px,font-style:italic
+    classDef store fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A,stroke-width:1px
+    classDef gray fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A,stroke-width:1px,border-radius:50%
+`;
+
+const { svg } = await mermaid.render('graph-svg', diagram);
+document.getElementById('erd').innerHTML = svg;
+</script>
