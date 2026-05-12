@@ -1,12 +1,19 @@
-5-line message to manager
-I have created a terminal-based LLM + OR-Tools CP-SAT Production Scheduling MVP.
-The system takes a production scheduling question in plain English and extracts objective, machines, time, constraints, and variables using an LLM.
-It validates the CSV dataset using demand, inventory, production quantity, due dates, and processing time.
-OR-Tools CP-SAT then generates the optimized schedule mathematically; the LLM does not create the schedule.
-The final output includes a schedule table, solver summary, late-job report, and validated business explanation.
-5-line implementation plan
-User enters a production scheduling prompt, and the LLM converts it into structured JSON.
-Python applies MVP normalization and asks the user to confirm or correct the extracted plan.
-The CSV dataset is loaded, columns are mapped, and demand/inventory/time validation is performed.
-CP-SAT builds variables, constraints, and the makespan objective, then solves the schedule.
-The result parser creates the final schedule, prepares explanation facts, and the LLM explains only verified solver output.
+  1️⃣ Data Audit
+  Python scans the full file — checks for empty sheets, missing values, duplicate rows. Then an LLM looks at the sheets and figures out which ones are actually related to each other (like orders linking to
+  timelines, products linking to machines). If anything is broken here, pipeline stops and tells you exactly why.
+
+  2️⃣ Schema Reference (optional)
+  Client can describe their columns in plain English — like "this column is the order quantity, this one links to machines." The LLM reads that and uses it as trusted guidance for the next step.
+
+  3️⃣ Schema Mapping Agent
+  This is the main AI agent. It explores the workbook autonomously using tools, figures out which column maps to which scheduling concept (order ID, machine capacity, deadlines etc.), verifies the foreign key
+  relationships between sheets, and submits the full mapping. No hardcoding, works on any dataset.
+
+  4️⃣ Human Review
+  The mapped concepts show up in a table in the UI. The person can edit any row, approve the mapping, or reject and redo. Only after human approval does the pipeline continue. This is the trust gate.
+
+  5️⃣ Validation + Problem Understanding
+  Python checks every mapped column for nulls, wrong types, broken FK links. Then the LLM reads the client's scheduling requirement and extracts the problem type, objective, CP-SAT variables, and constraints.
+  Final check confirms all required data is present.
+
+  End result: either ✅ READY FOR CP-SAT (all gates passed, solver can run) or ❌ NOT READY with exact reason why.
