@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="1NmSYNPFcQNWk6Lq4R_y" name="Page-1">
+    <mxGraphModel dx="1177" dy="605" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cq0YCpP3o826kZwnA0GF-125" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="User Uploads the Data" vertex="1">
+          <mxGeometry height="50" width="300" x="810" y="835" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-126" parent="1" style="swimlane;startSize=35;fillColor=#f5f5f5;strokeColor=#000000;" value="Data Audit Node" vertex="1">
+          <mxGeometry height="175" width="550" x="685" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-127" parent="cq0YCpP3o826kZwnA0GF-126" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Python scans the full fileChecks: empty sheets, missing values, duplicate rows" vertex="1">
+          <mxGeometry height="55" width="220" x="40" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-128" parent="cq0YCpP3o826kZwnA0GF-126" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="LLM checks sheet relationshipse.g. orders link to timelines,products link to machines" vertex="1">
+          <mxGeometry height="55" width="220" x="295" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-129" edge="1" parent="cq0YCpP3o826kZwnA0GF-126" source="cq0YCpP3o826kZwnA0GF-127" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-130" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Audit Passed?" vertex="1">
+          <mxGeometry height="70" width="250" x="835" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-131" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;dashed=1;" value="Pipeline StopsTells user exactly what is broken" vertex="1">
+          <mxGeometry height="45" width="210" x="1130" y="1163" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-132" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-130" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-131" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-133" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Schema Reference  (Optional)Client describes columns in plain Englishe.g. &quot;this column is order quantity, this links to machines&quot;LLM reads this and uses it as trusted guidance" vertex="1">
+          <mxGeometry height="75" width="400" x="760" y="1275" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-134" parent="1" style="swimlane;startSize=35;fillColor=#f5f5f5;strokeColor=#000000;" value="Schema Mapping Agent" vertex="1">
+          <mxGeometry height="215" width="650" x="635" y="1405" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-135" parent="cq0YCpP3o826kZwnA0GF-134" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Explores the workbookautonomously using tools(reads every column and sheet)" vertex="1">
+          <mxGeometry height="65" width="185" x="25" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-136" parent="cq0YCpP3o826kZwnA0GF-134" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Maps each column to ascheduling concept(order ID, machine capacity,deadlines, quantities, etc.)" vertex="1">
+          <mxGeometry height="65" width="185" x="235" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-137" parent="cq0YCpP3o826kZwnA0GF-134" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Verifies foreign keyrelationships between sheetsand submits the full mapping" vertex="1">
+          <mxGeometry height="65" width="185" x="455" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-138" edge="1" parent="cq0YCpP3o826kZwnA0GF-134" source="cq0YCpP3o826kZwnA0GF-135" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-136">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-139" edge="1" parent="cq0YCpP3o826kZwnA0GF-134" source="cq0YCpP3o826kZwnA0GF-136" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-137">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-140" parent="cq0YCpP3o826kZwnA0GF-134" style="text;html=1;strokeColor=none;fillColor=none;align=center;" value="Result: 14 concepts mapped with confidence score for each" vertex="1">
+          <mxGeometry height="25" width="560" x="50" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-141" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Human Review&#xa;14 mapped concepts shown in a table in the UI&#xa;&#xa;Approve or reject the mapping&#xa;Pipeline only continues after human approval" vertex="1">
+          <mxGeometry height="75" width="450" x="735" y="1670" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-142" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Approved?" vertex="1">
+          <mxGeometry height="70" width="250" x="835" y="1790" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-143" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;dashed=1;" value="RejectedUser refines schema referenceand re-runs mapping" vertex="1">
+          <mxGeometry height="45" width="200" x="1130" y="1803" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-144" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-142" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-143" value="Reject">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-145" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-143" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;dashed=1;" target="cq0YCpP3o826kZwnA0GF-133" value="Redo">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1360" y="1825" />
+              <mxPoint x="1360" y="1313" />
+              <mxPoint x="1160" y="1313" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-146" parent="1" style="swimlane;startSize=35;fillColor=#f5f5f5;strokeColor=#000000;" value="Problem Understanding" vertex="1">
+          <mxGeometry height="155" width="550" x="685" y="1915" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-147" parent="cq0YCpP3o826kZwnA0GF-146" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="LLM reads the schedulingrequirement in plain Englishand extracts:Problem type, Objective,CP-SAT Variables, Constraints" vertex="1">
+          <mxGeometry height="85" width="200" x="40" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-148" parent="cq0YCpP3o826kZwnA0GF-146" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;" value="Final CheckConfirms all required datais present and valid forthe CP-SAT solver" vertex="1">
+          <mxGeometry height="85" width="200" x="305" y="48" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-149" edge="1" parent="cq0YCpP3o826kZwnA0GF-146" source="cq0YCpP3o826kZwnA0GF-147" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1.5;" target="cq0YCpP3o826kZwnA0GF-148">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-151" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-125" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-126">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-152" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-126" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-130">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-153" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-130" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-133" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-154" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-133" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-134">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-155" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-134" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-141">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-156" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-141" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-142">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-157" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-142" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" target="cq0YCpP3o826kZwnA0GF-146" value="Approve">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-158" edge="1" parent="1" source="cq0YCpP3o826kZwnA0GF-146" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="2115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cq0YCpP3o826kZwnA0GF-159" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="READY for CP-SAT solver" vertex="1">
+          <mxGeometry height="60" width="120" x="900" y="2110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
